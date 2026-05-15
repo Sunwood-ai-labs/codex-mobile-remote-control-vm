@@ -1,43 +1,60 @@
-# SSHだけのUbuntu VMを、スマホから操作できるCodex Desktop環境にした話
+# ChatGPTモバイルアプリのCodexから、Proxmox上のUbuntu VMを操作できた話
 
-> Codex DesktopをLinux VMで動かし、ChatGPT/CodexモバイルアプリからそのVMを遠隔操作できるところまで整えたセットアップ記録です。
+> 2026年5月15日のアップデートで触れるようになったChatGPTモバイルアプリ内のCodexから、Proxmox上のUbuntu VMで動くCodex Desktopへ接続し、実際にリモート制御できるところまで確認しました。
 
-今回やったことは、単に「Ubuntuにデスクトップ環境を入れた」だけではありません。
+これはかなり大きいです。
 
-もともとはCLI環境しかないUbuntu VMでした。そこへGUIを入れ、Codex Desktopを起動できる状態にし、さらにスマホからそのCodex Desktopセッションを操作できるところまで持っていきました。
+スマホからAIに質問できる、という話ではありません。スマホからCodexを開き、その先にあるCodex Desktopを通じて、実際のPC環境を操作できる。しかも今回は、手元のMacではなく、Proxmox上に立てたUbuntu VMまで届きました。
 
-最終的には、この一連の作業を第三者でも再現しやすいようにCodex Skill化し、公開リポジトリとして整備しています。
+つまり、モバイルアプリが「チャットの入口」ではなく、「実作業マシンを遠隔操作する入口」になり始めています。
 
 - Repository: <https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm>
 - Docs: <https://sunwood-ai-labs.github.io/codex-mobile-remote-control-vm/>
 - Release: <https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/releases/tag/v0.1.0>
 
-## 何ができるようになったのか
+## 今日のアップデートで見えたもの
 
-完成形はこうです。
+今回の入口になったのは、ChatGPTモバイルアプリ内に表示されたCodexのプレビュー機能です。
+
+![ChatGPT mobile app showing the Codex preview feature](../assets/screenshots/chatgpt-mobile-codex-preview.jpg)
+
+画面には、モバイルアプリから新しい作業を開始し、出力をレビューし、実行を誘導し、次のステップを承認できることが示されています。さらに、Codexはラップトップ、Mac mini、devboxなどで引き続き動作する、という説明があります。
+
+ここで重要なのは、接続先が「手元の1台」に閉じないことです。
+
+Codex Desktopが動く環境を用意できれば、その環境はモバイルアプリから操作対象になりえます。今回はその接続先として、Proxmox上のUbuntu VMを使いました。
+
+## 何を実現したのか
+
+今回のゴールは、SSHだけで触れるUbuntu VMを、スマホから操作できるCodex Desktopホストにすることでした。
+
+流れはこうです。
 
 1. Proxmox上にUbuntu VMを用意する
-2. SSHだけだったVMにXFCE/LightDMのデスクトップ環境を入れる
-3. VM内でCodex Desktopを起動する
-4. Codexのremote control系featureを有効にする
-5. 同じアカウントでスマホ側からアクセスする
-6. スマホからVM上のCodex Desktopを操作する
+2. CLIだけだったVMにXFCE/LightDMのデスクトップ環境を入れる
+3. ProxmoxのnoVNCコンソールからGUIログインできるようにする
+4. VM内でCodex Desktopを起動する
+5. Codexのremote control系featureを有効にする
+6. 同じアカウントでChatGPT/Codexモバイルアプリから接続する
+7. スマホからVM上のCodex Desktopセッションを制御する
 
-一番重要なのは最後の「スマホから操作できる」部分です。
+一番アピールしたいのは最後です。
 
-Linux側のSettings > Connections画面が完璧に見えるかどうかよりも、実際にモバイルアプリからVM上のCodex Desktopセッションを開き、操作できることを成功条件にしました。
+スマホから、Proxmox上のUbuntu VMに入っているCodex Desktopを制御できました。これはつまり、Codex Appが見ている実作業PCを、さらにモバイルから操作できるということです。
 
-## セットアップ後の画面
+## Proxmox上のUbuntu VMでCodex Desktopが動く
 
-Proxmoxのコンソール上では、Ubuntu VMの中でCodex Desktopが動いています。
+セットアップ後、Proxmoxのコンソール上ではUbuntu VMの中でCodex Desktopが動いています。
 
 ![Proxmox console showing Codex Desktop running inside the codex-ubuntu VM](../assets/screenshots/proxmox-codex-desktop-vm.png)
 
-VMには、あとで見分けやすいように `codex`, `desktop`, `remote-control`, `ubuntu` のタグも付けました。
+VMには `codex`, `desktop`, `remote-control`, `ubuntu` のタグも付けました。あとから見ても、このVMが「Codex Desktopをスマホ制御するための環境」だと分かります。
 
 ![Proxmox node view showing the codex-ubuntu VM with codex, desktop, remote-control, and ubuntu tags](../assets/screenshots/proxmox-node-tags.png)
 
-そして、今回の本命がこちらです。スマホ側からVM上のCodex Desktopセッションを操作できています。
+## 本命はスマホからの制御
+
+そして、今回いちばん大事な証跡がこれです。
 
 <table>
   <tr>
@@ -50,15 +67,43 @@ VMには、あとで見分けやすいように `codex`, `desktop`, `remote-cont
   </tr>
 </table>
 
-この2枚のスマホスクリーンショットが、今回のセットアップで一番大事な証跡です。
+スマホ側から、VM上のCodex Desktopセッションを開いて操作できています。
 
-## ハマりどころ
+ここで起きていることを分解すると、かなり面白いです。
 
-今回のポイントは、GUI環境とremote controlの両方を揃える必要があったことです。
+- 物理ホストはProxmoxを動かしているPC
+- その上にUbuntu VMがある
+- Ubuntu VMの中でCodex Desktopが動いている
+- ChatGPT/Codexモバイルアプリから、そのCodex Desktopへ接続している
+- 結果として、スマホからVM上の実作業環境を操作できている
 
-CLIだけのUbuntu VMでは、Proxmoxのコンソールにログインプロンプトしか出ません。Codex Desktopを使うには、まず軽量なデスクトップ環境を入れて、noVNC越しにもGUIが見えるようにする必要があります。
+これは、単なるリモートチャットではありません。実際のPC上で動くCodex Appを、スマホから遠隔操作する構成です。
 
-また、Codex側では次のfeature設定が必要でした。
+## 何が嬉しいのか
+
+この構成が嬉しいのは、作業環境を「スマホの外」に置けることです。
+
+スマホ単体では、重いビルド、ローカルファイル編集、GUIアプリ操作、VM管理、長時間のセットアップなどはやりづらいです。でも、実作業はUbuntu VM側に置き、スマホは指示と承認の端末として使うなら話が変わります。
+
+たとえば次のような使い方が見えてきます。
+
+- 外出先から自宅LabのVMへ作業を投げる
+- Proxmox上の検証環境をスマホから確認する
+- Codex DesktopにGUI操作やローカル検証を任せる
+- 作業の途中結果をスマホでレビューして承認する
+- Mac miniやdevboxだけでなく、自分で作ったUbuntu VMを作業ノードにする
+
+スマホが強力な開発マシンになる、というより、スマホが強力な開発マシン群への操作盤になる感覚です。
+
+## ハマりどころはGUIとConnections表示
+
+もちろん、SSHだけのUbuntu VMにそのままCodex Desktopを入れて終わり、とはいきませんでした。
+
+まず、CLIだけのVMではProxmoxのコンソールに `tty1` のログイン画面しか出ません。Codex Desktopを実用するには、軽量なデスクトップ環境を入れて、noVNC越しにもGUIが見えるようにする必要があります。
+
+今回はXFCEとLightDMを使って、Ubuntu VMをGUIログインできる状態にしました。
+
+さらに、Codex側では次のfeature設定を入れています。
 
 ```toml
 [features]
@@ -67,45 +112,43 @@ remote_control = true
 workspace_dependencies = false
 ```
 
-ただし、Linux版Codex DesktopのConnections画面は、状態表示が少し紛らわしいことがあります。画面上でデバイス行が出たり消えたりしても、モバイルアプリ側では正常に操作できるケースがありました。
+もう一つ大事なのが、Linux版Codex DesktopのConnections画面です。
 
-そこで、今回のSkillでは「Linux側の表示」ではなく「スマホから実際に制御できるか」を最終確認にしています。
+この画面は、状態表示が少し分かりづらいことがあります。デバイス行が一瞬見えたあと消えたり、Linux側の表示だけを見ると成功しているのか判断しづらい場面がありました。
 
-## なぜSkill化したのか
+そのため、今回のセットアップでは「Linux側のConnections画面がきれいに見えるか」ではなく、「スマホから実際にVM上のCodex Desktopを操作できるか」を最終的な成功条件にしました。
 
-一度うまくいっただけでは、次回もスムーズに再現できるとは限りません。
+## 再現できるようにSkill化した
 
-特にこの手のVMセットアップは、次の情報が散らばりがちです。
+このセットアップは、一度うまくいっただけではもったいないです。
 
-- VM ID
-- VM名
-- IPアドレス
-- SSH alias
-- GUIログイン方法
-- Codex Desktopの起動方法
-- feature flagの設定
-- remote controlの確認方法
-- 失敗時に見るログ
+VMの作成、GUI化、Codex Desktop起動、feature設定、モバイル接続、トラブルシュートまで、手順として残さないと次回また同じところで迷います。
 
-そこで、作業手順をCodex Skillとしてまとめました。
+そこで、今回の一連の作業をCodex Skillとしてまとめました。
 
-このリポジトリをCodexのskillsディレクトリに入れておけば、次回からは次のように依頼できます。
+```bash
+mkdir -p "$HOME/.codex/skills"
+git clone https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm.git \
+  "$HOME/.codex/skills/codex-mobile-remote-control-vm"
+```
+
+導入後は、Codexにこう頼めます。
 
 ```text
 Ubuntu VMでCodex Desktopをスマホ mobile からremote controlできるようにセットアップして
 ```
 
-Skill側では、VMの棚卸し、GUI環境の確認、Codex設定、mobile control検証、トラブルシュート観点までを一連の流れとして扱います。
+Skill側では、VMの棚卸し、GUI環境、Codex設定、mobile control確認、ログ確認までをひとつの流れとして扱います。
 
-## 監査スクリプトも入れた
+## 監査スクリプトも用意した
 
-再現性を上げるために、読み取り専用の監査スクリプトも用意しました。
+再現性を上げるために、読み取り専用の監査スクリプトも入れています。
 
 ```bash
 ./scripts/audit-codex-remote-vm.sh codex-ubuntu
 ```
 
-このスクリプトでは、だいたい次の観点を確認します。
+確認するのは、だいたいこのあたりです。
 
 - desktop service
 - GUI session
@@ -114,28 +157,32 @@ Skill側では、VMの棚卸し、GUI環境の確認、Codex設定、mobile cont
 - remote-control enrollment
 - Codex Desktop logs
 
-「なぜスマホから見えないのか」「なぜConnections行が消えたのか」を調べるための入口になります。
+「スマホから見えない」「Connections行が消えた」「Codex Desktopは起動しているのに制御できない」といったときの入口になります。
 
-## 公開リポジトリとして整備
+## この先の可能性
 
-最終的には、Skillだけでなくリポジトリ全体も公開用に整えました。
+今回できたことは、かなり素直に拡張できます。
 
-- 英日README
-- VitePressドキュメント
-- リリースノート
-- スクリーンショット付きウォークスルー
-- GitHub Actions CI
-- GitHub Pages deploy
-- `v0.1.0` GitHub Release
+接続先がProxmox上のUbuntu VMでよいなら、用途別に複数の作業VMを用意できます。
 
-`v0.1.0` のリリースでは、初回公開に必要なドキュメントと検証導線をまとめています。
+- 検証用Ubuntu VM
+- GPU付きの実験VM
+- GUIアプリ操作用VM
+- セキュリティ検証用Lab VM
+- 長時間タスクを投げるdevbox
+
+それぞれにCodex Desktopを入れておけば、スマホから必要な作業環境へ入り、Codexに作業を進めてもらい、重要なタイミングだけ人間が承認できます。
+
+これは「PCの前に座ってCodexを使う」から一歩進んで、「どこからでも自分の作業環境群をCodex経由で動かす」に近い体験です。
 
 ## まとめ
 
-今回の面白いところは、Codex Desktopを「手元のMacアプリ」だけではなく、「VM上で動く遠隔操作対象」として扱えるようになったところです。
+今回の成果は、ChatGPTモバイルアプリ内のCodexから、Proxmox上のUbuntu VMに接続し、VM内で動くCodex Desktopを実際に制御できたことです。
 
-SSHだけで触っていたUbuntu VMが、GUIを持ち、Codex Desktopを起動し、スマホから操作できる作業環境になる。これはかなり便利です。
+スマホからAIに相談するだけではなく、スマホから実作業PCを動かす。
 
-しかも、今回の手順はSkill化したので、次に同じようなVMを作るときはゼロから思い出す必要がありません。
+この差はかなり大きいです。
 
-スマホからCodexを操作できるLinux VM。これはちょっと楽しい未来の作業机です。
+Codex Appが実際のPCを制御できるなら、そのCodex Appをモバイルから制御することで、スマホは作業環境全体へのリモコンになります。Proxmox、Ubuntu VM、Codex Desktop、ChatGPTモバイルアプリがつながると、開発環境や検証環境の扱い方がかなり変わりそうです。
+
+今回のリポジトリとSkillは、そのための最初の再現可能なセットアップとして公開しています。
