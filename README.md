@@ -73,7 +73,9 @@ npm run docs:dev
 
 ## 🖼️ Setup Proof
 
-The screenshots below show the actual Proxmox VM setup used to validate this Skill.
+The screenshots below show the actual Proxmox VM setup used to validate this Skill. The mobile screenshot is the most important proof surface: it shows the VM-backed Codex Desktop session being controlled from a phone.
+
+![ChatGPT/Codex mobile app controlling the VM-backed Codex Desktop session](assets/screenshots/mobile-remote-control-proof.png)
 
 ![Proxmox console showing Codex Desktop running inside the codex-ubuntu VM](assets/screenshots/proxmox-codex-desktop-vm.png)
 
