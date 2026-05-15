@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ChatGPT Mobile Codex Can Now Control My Proxmox Ubuntu VM</title>
+<style>
+  body { margin: 40px; color: #111; background: #fff; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif; line-height: 1.9; }
+  article { max-width: 720px; }
+  h2 { font-size: 1.55rem; margin: 2.4em 0 0.8em; font-weight: 700; }
+  h3 { font-size: 1.25rem; margin: 2em 0 0.6em; font-weight: 700; }
+  p { margin: 1.1em 0; }
+  figure { margin: 1.2em 0 1.6em; }
+  img { display: block; max-width: 100%; height: auto; border-radius: 8px; }
+  pre { margin: 1.2em 0; padding: 1em; background: #f6f8fa; border-radius: 6px; overflow-x: auto; line-height: 1.55; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+  blockquote { margin: 1.2em 0; padding-left: 1em; border-left: 4px solid #ddd; color: #444; }
+  ul, ol { margin: 1em 0 1em 1.4em; }
+  a { color: #0969da; text-decoration: underline; text-underline-offset: 0.15em; }
+</style>
+</head>
+<body>
+<article>
+<figure><img src="../../assets/thumbnails/chatgpt-mobile-codex-proxmox-vm-en.png" alt="ChatGPT Mobile Codex controls an Ubuntu VM thumbnail"></figure>
+<p>On May 15, 2026, I tried the new Codex experience inside the ChatGPT mobile app and connected it to a real Ubuntu VM running on Proxmox.</p>
+<p>That may sound like a small remote-access experiment, but it changes the shape of the workflow.</p>
+<p>This is not just &quot;asking AI from a phone.&quot; The phone opens ChatGPT Mobile Codex, Codex reaches a desktop Codex session, and that desktop session can operate an actual computer environment. In my case, the target was not my local Mac. It was an Ubuntu VM running inside Proxmox.</p>
+<p>I also turned the whole setup into an open source Codex Skill, so another agent can help reproduce the VM setup instead of leaving the process as a one-off lab note.</p>
+<p>Repository: https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm</p>
+<p>Documentation: https://sunwood-ai-labs.github.io/codex-mobile-remote-control-vm/</p>
+<p>Release: https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/releases/tag/v0.1.0</p>
+<h2>What Changed</h2>
+<p>The important part is the role of the mobile app.</p>
+<p>The ChatGPT mobile app is no longer only a place to talk to an assistant. With Codex available from mobile, it can become a control surface for real work environments.</p>
+<p>The path I tested looks like this:</p>
+<ol>
+<li>Open Codex inside the ChatGPT mobile app.</li>
+<li>Connect to a Codex Desktop session.</li>
+<li>Run that Codex Desktop session inside an Ubuntu VM.</li>
+<li>Host the Ubuntu VM on Proxmox.</li>
+<li>Use the phone to guide, review, and approve work happening on that VM.</li>
+</ol>
+<p>In other words, the phone becomes a remote control for a real devbox.</p>
+<h2>The Setup</h2>
+<p>I started with an Ubuntu VM that was basically SSH-only. To make it useful as a Codex Desktop host, I needed a real desktop session.</p>
+<p>The setup flow was:</p>
+<ol>
+<li>Create or select an Ubuntu VM in Proxmox.</li>
+<li>Install a lightweight desktop environment with XFCE and LightDM.</li>
+<li>Confirm the Proxmox noVNC console shows a GUI instead of only a TTY login.</li>
+<li>Launch Codex Desktop inside the VM.</li>
+<li>Enable the remote-control related Codex feature flags.</li>
+<li>Sign in with the same account used by the ChatGPT mobile app.</li>
+<li>Verify that the mobile app can open and control the VM-backed Codex session.</li>
+</ol>
+<p>The feature block used on the Codex side was:</p>
+<pre><code>[features]
+remote_connections = true
+remote_control = true
+workspace_dependencies = false</code></pre>
+<h2>Proof From The VM</h2>
+<p>Inside Proxmox, the VM is a normal Ubuntu 24.04 desktop machine running Codex Desktop.</p>
+<figure><img src="../../assets/screenshots/proxmox-codex-desktop-vm.png" alt="Proxmox console showing Codex Desktop running inside the codex-ubuntu VM"></figure>
+<p>The VM is also tagged as <strong>codex</strong>, <strong>desktop</strong>, <strong>remote-control</strong>, and <strong>ubuntu</strong>, so it is easy to identify later as the mobile-controlled Codex environment.</p>
+<figure><img src="../../assets/screenshots/proxmox-node-tags.png" alt="Proxmox node view showing the codex-ubuntu VM with codex, desktop, remote-control, and ubuntu tags"></figure>
+<h2>The Most Important Proof: Mobile Control</h2>
+<p>The strongest proof is not a local Linux settings panel.</p>
+<p>The strongest proof is the phone.</p>
+<p>The ChatGPT mobile app was able to open the VM-backed Codex Desktop session and control it.</p>
+<figure><img src="../../assets/screenshots/chatgpt-mobile-codex-preview.jpg" alt="ChatGPT mobile app showing the Codex preview feature"></figure>
+<p>The actual mobile-control proof is shown below.</p>
+<figure><img src="../../assets/screenshots/mobile-remote-control-proof.png" alt="ChatGPT/Codex mobile app controlling the VM-backed Codex Desktop session"></figure>
+<figure><img src="../../assets/screenshots/mobile-remote-control-second-proof.png" alt="Second ChatGPT/Codex mobile remote-control proof screenshot"></figure>
+<p>The chain looks like this:</p>
+<ul>
+<li>A physical machine runs Proxmox.</li>
+<li>Proxmox runs an Ubuntu VM.</li>
+<li>The Ubuntu VM runs Codex Desktop.</li>
+<li>ChatGPT Mobile Codex connects to that Codex Desktop session.</li>
+<li>The phone can now guide work happening inside the VM.</li>
+</ul>
+<p>That is more than remote chat. It is remote control of a real working computer through Codex.</p>
+<h2>Why This Matters</h2>
+<p>Phones are not ideal places to run long builds, inspect local files, operate GUI apps, or manage VMs directly.</p>
+<p>But a phone is a very good place to guide and approve work.</p>
+<p>If the heavy work stays on a VM or devbox, the phone can become the control surface:</p>
+<ul>
+<li>Start work from outside the desk.</li>
+<li>Check a Proxmox lab VM from mobile.</li>
+<li>Let Codex Desktop operate local tools inside the VM.</li>
+<li>Review intermediate results from the phone.</li>
+<li>Approve the next step without sitting in front of the host machine.</li>
+</ul>
+<p>The interesting shift is that the mobile app does not need to become the development machine. It can become the remote control for a fleet of development machines.</p>
+<h2>The Rough Edges</h2>
+<p>This was not just a package install.</p>
+<p>An SSH-only Ubuntu VM first needs a graphical session. Without that, the Proxmox console only shows a TTY login, which is not enough for a desktop app workflow.</p>
+<p>The Linux Codex Desktop connection UI can also be misleading. A device row may appear briefly and then disappear, while mobile control still works. For this setup, I treat the phone-side result as the final proof.</p>
+<p>If the phone can open and control the VM-backed Codex session, the setup is working.</p>
+<h2>I Turned It Into An OSS Codex Skill</h2>
+<p>After the first working setup, I packaged the process as an open source Codex Skill.</p>
+<p>The goal is not just to document what I did. The goal is to let an agent help do it again.</p>
+<p>The Skill is designed to guide an agent through:</p>
+<ul>
+<li>VM inventory for Proxmox or SSH-accessible Ubuntu hosts.</li>
+<li>Desktop installation or repair for CLI-only VMs.</li>
+<li>Codex Desktop launch and restart paths.</li>
+<li>Remote-control feature configuration.</li>
+<li>Mobile app verification.</li>
+<li>Troubleshooting for logs, enrollment state, and disappearing connection rows.</li>
+</ul>
+<p>Install it like this:</p>
+<pre><code>mkdir -p &quot;$HOME/.codex/skills&quot;
+git clone https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm.git \
+  &quot;$HOME/.codex/skills/codex-mobile-remote-control-vm&quot;</code></pre>
+<p>Then ask Codex something like:</p>
+<pre><code>Set up this Ubuntu VM so Codex Desktop can be remote-controlled from the ChatGPT mobile app.</code></pre>
+<p>The point is that the agent can help prepare the target environment, while the phone becomes the approval and control surface.</p>
+<h2>What This Could Enable</h2>
+<p>If a Proxmox Ubuntu VM can become a mobile-controlled Codex workspace, the pattern can expand.</p>
+<p>You could create multiple work nodes:</p>
+<ul>
+<li>A clean Ubuntu validation VM.</li>
+<li>A GPU experiment VM.</li>
+<li>A GUI automation VM.</li>
+<li>A security lab VM.</li>
+<li>A long-running devbox.</li>
+</ul>
+<p>Each one can run Codex Desktop. Each one can be reached from ChatGPT Mobile Codex. Each one can become a specialized work environment that is available from wherever the phone is.</p>
+<p>This starts to feel less like &quot;using Codex on a PC&quot; and more like &quot;using Codex to operate my workbench from anywhere.&quot;</p>
+<h2>Closing Thought</h2>
+<p>The big result is simple:</p>
+<p>ChatGPT Mobile Codex reached my Proxmox Ubuntu VM and controlled the Codex Desktop session running inside it.</p>
+<p>That means the phone is not just a chat device. It can become the remote control for an actual working computer.</p>
+<p>And because the setup is now an OSS Codex Skill, the path is not locked inside one experiment. It is reusable, inspectable, and ready for other agents to follow.</p>
+</article>
+</body>
+</html>

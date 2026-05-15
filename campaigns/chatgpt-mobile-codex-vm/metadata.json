@@ -1,0 +1,9 @@
+{
+  "title": "ChatGPT Mobile Codex Can Now Control My Proxmox Ubuntu VM",
+  "language": "en",
+  "platforms": ["note", "medium", "substack"],
+  "thumbnail": "../../assets/thumbnails/chatgpt-mobile-codex-proxmox-vm-en.png",
+  "repository": "https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm",
+  "docs": "https://sunwood-ai-labs.github.io/codex-mobile-remote-control-vm/",
+  "release": "https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/releases/tag/v0.1.0"
+}
