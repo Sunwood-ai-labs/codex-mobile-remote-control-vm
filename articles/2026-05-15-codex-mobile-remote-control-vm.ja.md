@@ -2,6 +2,8 @@
 
 > 2026年5月15日のアップデートで触れるようになったChatGPTモバイルアプリ内のCodexから、Proxmox上のUbuntu VMで動くCodex Desktopへ接続し、実際にリモート制御できるところまで確認しました。
 
+![スマホからUbuntu VMを操作するCodex x Proxmox x OSS Skillのサムネイル](../assets/thumbnails/codex-mobile-proxmox-vm-ja.png)
+
 これはかなり大きいです。
 
 スマホからAIに質問できる、という話ではありません。スマホからCodexを開き、その先にあるCodex Desktopを通じて、実際のPC環境を操作できる。しかも今回は、手元のMacではなく、Proxmox上に立てたUbuntu VMまで届きました。
