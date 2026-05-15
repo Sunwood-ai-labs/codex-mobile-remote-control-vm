@@ -18,6 +18,7 @@ export default defineConfig({
     },
     nav: [
       { text: 'Guide', link: '/guide/getting-started' },
+      { text: 'Release', link: '/guide/releases/v0.1.0' },
       { text: '日本語', link: '/ja/' },
       { text: 'GitHub', link: 'https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm' }
     ],
@@ -28,7 +29,9 @@ export default defineConfig({
           items: [
             { text: 'Getting Started', link: '/guide/getting-started' },
             { text: 'Usage', link: '/guide/usage' },
-            { text: 'Troubleshooting', link: '/guide/troubleshooting' }
+            { text: 'Troubleshooting', link: '/guide/troubleshooting' },
+            { text: 'v0.1.0 Release Notes', link: '/guide/releases/v0.1.0' },
+            { text: 'Mobile Control Walkthrough', link: '/guide/articles/mobile-remote-control-vm-v0.1.0' }
           ]
         }
       ],
@@ -38,7 +41,9 @@ export default defineConfig({
           items: [
             { text: 'はじめに', link: '/ja/guide/getting-started' },
             { text: '使い方', link: '/ja/guide/usage' },
-            { text: 'トラブルシュート', link: '/ja/guide/troubleshooting' }
+            { text: 'トラブルシュート', link: '/ja/guide/troubleshooting' },
+            { text: 'v0.1.0 リリースノート', link: '/ja/guide/releases/v0.1.0' },
+            { text: 'スマホ制御ウォークスルー', link: '/ja/guide/articles/mobile-remote-control-vm-v0.1.0' }
           ]
         }
       ]
@@ -63,6 +68,7 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'ガイド', link: '/ja/guide/getting-started' },
+          { text: 'リリース', link: '/ja/guide/releases/v0.1.0' },
           { text: 'English', link: '/' },
           { text: 'GitHub', link: 'https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm' }
         ]

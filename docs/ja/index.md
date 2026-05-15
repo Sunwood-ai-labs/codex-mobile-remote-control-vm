@@ -30,6 +30,8 @@ features:
 - [はじめに](./guide/getting-started.md): Skillの導入と準備情報。
 - [使い方](./guide/usage.md): セットアップ実行と既存VMの監査。
 - [トラブルシュート](./guide/troubleshooting.md): Linuxポート特有の挙動の読み方。
+- [v0.1.0 リリースノート](./guide/releases/v0.1.0.md): 初回公開リリースのまとめ。
+- [スマホ制御ウォークスルー](./guide/articles/mobile-remote-control-vm-v0.1.0.md): スクリーンショット付きのセットアップ記録。
 
 Skill本体は [SKILL.md](https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/blob/main/SKILL.md) です。
 

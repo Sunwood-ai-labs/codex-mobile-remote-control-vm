@@ -30,6 +30,8 @@ features:
 - [Getting Started](./guide/getting-started.md): install the skill and prepare inputs.
 - [Usage](./guide/usage.md): run the setup or audit an existing VM.
 - [Troubleshooting](./guide/troubleshooting.md): interpret Linux-port edge cases.
+- [v0.1.0 Release Notes](./guide/releases/v0.1.0.md): initial public release summary.
+- [Mobile Remote Control Walkthrough](./guide/articles/mobile-remote-control-vm-v0.1.0.md): screenshot-backed setup story.
 
 For the raw Skill entry point, see [SKILL.md](https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/blob/main/SKILL.md).
 

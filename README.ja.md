@@ -15,6 +15,7 @@
 <p align="center">
   <a href="https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/actions/workflows/ci.yml/badge.svg"></a>
   <a href="https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/actions/workflows/deploy-docs.yml"><img alt="Docs" src="https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/actions/workflows/deploy-docs.yml/badge.svg"></a>
+  <a href="https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/releases/tag/v0.1.0"><img alt="Release v0.1.0" src="https://img.shields.io/badge/Release-v0.1.0-2563EB"></a>
   <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-111827">
   <img alt="Ubuntu" src="https://img.shields.io/badge/Ubuntu-24.04-E95420">
   <img alt="License" src="https://img.shields.io/badge/License-MIT-blue">
@@ -62,6 +63,9 @@ Skill本体は [SKILL.md](SKILL.md) です。実作業の手順は [references/r
 ブラウザで読めるドキュメントはこちらです。
 
 <https://sunwood-ai-labs.github.io/codex-mobile-remote-control-vm/>
+
+- [v0.1.0 リリースノート](https://sunwood-ai-labs.github.io/codex-mobile-remote-control-vm/ja/guide/releases/v0.1.0)
+- [スマホ制御ウォークスルー](https://sunwood-ai-labs.github.io/codex-mobile-remote-control-vm/ja/guide/articles/mobile-remote-control-vm-v0.1.0)
 
 ローカルpreview:
 
