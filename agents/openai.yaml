@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Mobile Remote VM"
+  short_description: "Build mobile-control Codex VMs."
+  default_prompt: "Set up an Ubuntu desktop VM for Codex Desktop mobile remote control, verify mobile access, and write a handoff."
