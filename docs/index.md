@@ -35,9 +35,12 @@ For the raw Skill entry point, see [SKILL.md](https://github.com/Sunwood-ai-labs
 
 ## Setup Proof
 
-These screenshots show the validated setup. The phone screenshot is the primary proof: the ChatGPT/Codex mobile app is controlling the VM-backed Codex Desktop session. The Proxmox screenshots show VM `101 (codex-ubuntu)` running Codex Desktop in the console, plus the node inventory with `codex`, `desktop`, `remote-control`, and `ubuntu` tags.
+These screenshots show the validated setup. The phone screenshots are the primary proof: the ChatGPT/Codex mobile app is controlling the VM-backed Codex Desktop session. The Proxmox screenshots show VM `101 (codex-ubuntu)` running Codex Desktop in the console, plus the node inventory with `codex`, `desktop`, `remote-control`, and `ubuntu` tags.
 
-![ChatGPT/Codex mobile app controlling the VM-backed Codex Desktop session](/screenshots/mobile-remote-control-proof.png)
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start;">
+  <img src="/screenshots/mobile-remote-control-proof.png" alt="ChatGPT/Codex mobile app controlling the VM-backed Codex Desktop session">
+  <img src="/screenshots/mobile-remote-control-second-proof.png" alt="Second ChatGPT/Codex mobile remote-control proof screenshot">
+</div>
 
 ![Proxmox console showing Codex Desktop running inside the codex-ubuntu VM](/screenshots/proxmox-codex-desktop-vm.png)
 

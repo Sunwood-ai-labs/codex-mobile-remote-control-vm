@@ -75,7 +75,16 @@ npm run docs:dev
 
 このSkillの検証に使った、実際のセットアップ画像です。最重要の証跡は、スマホからVM上のCodex Desktop sessionを制御できていることです。
 
-![ChatGPT/Codex mobile app controlling the VM-backed Codex Desktop session](assets/screenshots/mobile-remote-control-proof.png)
+<table>
+  <tr>
+    <td width="50%">
+      <img src="assets/screenshots/mobile-remote-control-proof.png" alt="ChatGPT/Codex mobile app controlling the VM-backed Codex Desktop session">
+    </td>
+    <td width="50%">
+      <img src="assets/screenshots/mobile-remote-control-second-proof.png" alt="Second ChatGPT/Codex mobile remote-control proof screenshot">
+    </td>
+  </tr>
+</table>
 
 ![Proxmox console showing Codex Desktop running inside the codex-ubuntu VM](assets/screenshots/proxmox-codex-desktop-vm.png)
 

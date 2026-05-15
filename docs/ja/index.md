@@ -37,7 +37,10 @@ Skill本体は [SKILL.md](https://github.com/Sunwood-ai-labs/codex-mobile-remote
 
 検証済みのセットアップ画像です。最重要の証跡は、ChatGPT/Codex mobile appからVM上のCodex Desktop sessionを制御できていることです。Proxmox側の画像では、VM `101 (codex-ubuntu)` 上でCodex Desktopが動いているconsole画面と、`codex`, `desktop`, `remote-control`, `ubuntu` タグが付いたnode inventoryを載せています。
 
-![ChatGPT/Codex mobile app controlling the VM-backed Codex Desktop session](/screenshots/mobile-remote-control-proof.png)
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start;">
+  <img src="/screenshots/mobile-remote-control-proof.png" alt="ChatGPT/Codex mobile app controlling the VM-backed Codex Desktop session">
+  <img src="/screenshots/mobile-remote-control-second-proof.png" alt="Second ChatGPT/Codex mobile remote-control proof screenshot">
+</div>
 
 ![Proxmox console showing Codex Desktop running inside the codex-ubuntu VM](/screenshots/proxmox-codex-desktop-vm.png)
 
