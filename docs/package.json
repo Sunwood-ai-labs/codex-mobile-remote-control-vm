@@ -1,0 +1,12 @@
+{
+  "name": "codex-mobile-remote-control-vm-docs",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "docs:build": "vitepress build",
+    "docs:dev": "vitepress dev --host 127.0.0.1"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}

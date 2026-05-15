@@ -14,6 +14,7 @@
 
 <p align="center">
   <a href="https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/actions/workflows/deploy-docs.yml"><img alt="Docs" src="https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/actions/workflows/deploy-docs.yml/badge.svg"></a>
   <img alt="Codex Skill" src="https://img.shields.io/badge/Codex-Skill-111827">
   <img alt="Ubuntu" src="https://img.shields.io/badge/Ubuntu-24.04-E95420">
   <img alt="License" src="https://img.shields.io/badge/License-MIT-blue">
@@ -56,6 +57,20 @@ Ubuntu VMでCodex Desktopをスマホ mobile からremote controlできるよう
 
 The skill entry point is [SKILL.md](SKILL.md). The operational runbook is [references/runbook.md](references/runbook.md).
 
+## 📚 Documentation
+
+Browsable documentation is available at:
+
+<https://sunwood-ai-labs.github.io/codex-mobile-remote-control-vm/>
+
+Local docs preview:
+
+```bash
+cd docs
+npm ci
+npm run docs:dev
+```
+
 ## 🩺 Audit A VM
 
 After installing the skill, run the read-only audit script against an SSH alias or host:
@@ -75,6 +90,7 @@ The audit checks desktop services, GUI session state, Codex config, app-server f
 ├── README.ja.md                     # Japanese public README
 ├── agents/openai.yaml               # Codex skill registry metadata
 ├── references/runbook.md            # Detailed setup and troubleshooting guide
+├── docs/                            # Bilingual VitePress documentation
 ├── scripts/audit-codex-remote-vm.sh # Read-only VM health audit
 └── scripts/validate.sh              # Local repository validation
 ```
@@ -93,6 +109,7 @@ The validation checks:
 - Codex skill quick validation when available
 - shell syntax for helper scripts
 - README references to core files
+- VitePress docs build when Node dependencies are installed
 
 ## 🔐 Safety Notes
 
