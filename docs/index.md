@@ -32,3 +32,11 @@ features:
 - [Troubleshooting](./guide/troubleshooting.md): interpret Linux-port edge cases.
 
 For the raw Skill entry point, see [SKILL.md](https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/blob/main/SKILL.md).
+
+## Setup Proof
+
+These screenshots show the validated Proxmox setup: VM `101 (codex-ubuntu)` running Codex Desktop in the console, plus the node inventory with `codex`, `desktop`, `remote-control`, and `ubuntu` tags.
+
+![Proxmox console showing Codex Desktop running inside the codex-ubuntu VM](/screenshots/proxmox-codex-desktop-vm.png)
+
+![Proxmox node view showing the codex-ubuntu VM with codex, desktop, remote-control, and ubuntu tags](/screenshots/proxmox-node-tags.png)

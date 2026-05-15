@@ -32,3 +32,11 @@ features:
 - [トラブルシュート](./guide/troubleshooting.md): Linuxポート特有の挙動の読み方。
 
 Skill本体は [SKILL.md](https://github.com/Sunwood-ai-labs/codex-mobile-remote-control-vm/blob/main/SKILL.md) です。
+
+## セットアップ証跡
+
+検証済みのProxmoxセットアップ画像です。VM `101 (codex-ubuntu)` 上でCodex Desktopが動いているconsole画面と、`codex`, `desktop`, `remote-control`, `ubuntu` タグが付いたnode inventoryを載せています。
+
+![Proxmox console showing Codex Desktop running inside the codex-ubuntu VM](/screenshots/proxmox-codex-desktop-vm.png)
+
+![Proxmox node view showing the codex-ubuntu VM with codex, desktop, remote-control, and ubuntu tags](/screenshots/proxmox-node-tags.png)

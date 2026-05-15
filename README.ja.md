@@ -71,6 +71,14 @@ npm ci
 npm run docs:dev
 ```
 
+## 🖼️ セットアップ証跡
+
+このSkillの検証に使った、実際のProxmox VMセットアップ画像です。
+
+![Proxmox console showing Codex Desktop running inside the codex-ubuntu VM](assets/screenshots/proxmox-codex-desktop-vm.png)
+
+![Proxmox node view showing the codex-ubuntu VM with codex, desktop, remote-control, and ubuntu tags](assets/screenshots/proxmox-node-tags.png)
+
 ## 🩺 VMを監査する
 
 SSH aliasまたはホスト名を指定して、読み取り専用の監査スクリプトを実行できます。

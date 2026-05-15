@@ -71,6 +71,14 @@ npm ci
 npm run docs:dev
 ```
 
+## 🖼️ Setup Proof
+
+The screenshots below show the actual Proxmox VM setup used to validate this Skill.
+
+![Proxmox console showing Codex Desktop running inside the codex-ubuntu VM](assets/screenshots/proxmox-codex-desktop-vm.png)
+
+![Proxmox node view showing the codex-ubuntu VM with codex, desktop, remote-control, and ubuntu tags](assets/screenshots/proxmox-node-tags.png)
+
 ## 🩺 Audit A VM
 
 After installing the skill, run the read-only audit script against an SSH alias or host:
