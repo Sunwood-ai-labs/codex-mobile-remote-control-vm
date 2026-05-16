@@ -71,6 +71,45 @@ DISPLAY=:0 XAUTHORITY=$HOME/.Xauthority XDG_RUNTIME_DIR=/run/user/1000 \
   nohup "$HOME/.local/bin/codex-desktop-launch" >/tmp/codex-desktop.log 2>&1 &
 ```
 
+## Desktop Shortcut
+
+Create a GUI shortcut after the launcher exists, so the VM desktop has a visible Codex Desktop entry:
+
+```bash
+mkdir -p "$HOME/Desktop" "$HOME/.local/share/applications"
+cat > "$HOME/Desktop/Codex Desktop.desktop" <<EOF
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Codex Desktop
+Comment=Launch Codex Desktop
+Exec=$HOME/.local/bin/codex-desktop-launch
+Icon=$HOME/codex-app/.codex-linux/codex-desktop.png
+Terminal=false
+Categories=Development;Utility;
+StartupNotify=true
+StartupWMClass=codex-desktop
+EOF
+chmod +x "$HOME/Desktop/Codex Desktop.desktop"
+cp "$HOME/Desktop/Codex Desktop.desktop" "$HOME/.local/share/applications/codex-desktop.desktop"
+chmod 644 "$HOME/.local/share/applications/codex-desktop.desktop"
+gio set "$HOME/Desktop/Codex Desktop.desktop" metadata::trusted true 2>/dev/null || true
+update-desktop-database "$HOME/.local/share/applications" 2>/dev/null || true
+```
+
+From the Skill repository, the same action can be run with:
+
+```bash
+ssh codex-ubuntu 'bash -s' < scripts/create-codex-desktop-shortcut.sh
+```
+
+Validate:
+
+```bash
+ls -l "$HOME/Desktop/Codex Desktop.desktop" "$HOME/.local/share/applications/codex-desktop.desktop"
+gio info "$HOME/Desktop/Codex Desktop.desktop" | grep metadata::trusted || true
+```
+
 ## Feature Flags
 
 Ensure:

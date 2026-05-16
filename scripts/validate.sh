@@ -13,6 +13,7 @@ required=(
   "agents/openai.yaml"
   "references/runbook.md"
   "scripts/audit-codex-remote-vm.sh"
+  "scripts/create-codex-desktop-shortcut.sh"
 )
 
 for path in "${required[@]}"; do
@@ -22,6 +23,7 @@ done
 
 echo "== shell syntax =="
 bash -n scripts/audit-codex-remote-vm.sh
+bash -n scripts/create-codex-desktop-shortcut.sh
 bash -n scripts/validate.sh
 
 echo "== skill quick validation =="
@@ -36,10 +38,12 @@ echo "== README link smoke =="
 grep -q "SKILL.md" README.md
 grep -q "references/runbook.md" README.md
 grep -q "scripts/audit-codex-remote-vm.sh" README.md
+grep -q "scripts/create-codex-desktop-shortcut.sh" README.md
 grep -q "sunwood-ai-labs.github.io/codex-mobile-remote-control-vm" README.md
 grep -q "SKILL.md" README.ja.md
 grep -q "references/runbook.md" README.ja.md
 grep -q "scripts/audit-codex-remote-vm.sh" README.ja.md
+grep -q "scripts/create-codex-desktop-shortcut.sh" README.ja.md
 grep -q "sunwood-ai-labs.github.io/codex-mobile-remote-control-vm" README.ja.md
 
 echo "== docs build =="

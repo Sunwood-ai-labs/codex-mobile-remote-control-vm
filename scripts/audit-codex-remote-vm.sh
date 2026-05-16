@@ -33,6 +33,19 @@ fi
 echo "== codex desktop processes =="
 pgrep -af '/codex-app/electron|codex-app/start.sh|webview-server' || true
 
+echo "== desktop shortcut =="
+for shortcut in "$HOME/Desktop/Codex Desktop.desktop" "$HOME/.local/share/applications/codex-desktop.desktop"; do
+  if [ -f "$shortcut" ]; then
+    ls -l "$shortcut"
+    sed -n '1,12p' "$shortcut"
+    if command -v gio >/dev/null 2>&1; then
+      gio info "$shortcut" 2>/dev/null | grep 'metadata::trusted' || true
+    fi
+  else
+    echo "missing $shortcut"
+  fi
+done
+
 echo "== app-server features =="
 python3 - <<'PY' || true
 import pathlib, sqlite3

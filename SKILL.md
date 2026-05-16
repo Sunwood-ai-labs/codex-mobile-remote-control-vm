@@ -25,6 +25,7 @@ Use this skill to take a fresh or existing Ubuntu VM from SSH-only to a usable C
    - Use the local Linux-compatible Codex Desktop port already chosen by the user or repo.
    - Create a stable launcher such as `~/.local/bin/codex-desktop-launch`.
    - If the port's launcher assumes a NixOS-only path, wrap it so it directly executes the app's `start.sh` with a normal shell.
+   - Create a desktop shortcut for the GUI user that points to the stable launcher.
    - Launch from the GUI session with:
 
 ```bash
@@ -59,6 +60,7 @@ sqlite3 ~/.codex/sqlite/codex-dev.db 'select feature_name, enabled from local_ap
    - GUI: Codex Desktop reaches the home screen and Settings > Connections opens.
    - Local state: `~/.codex/state_5.sqlite` has a `remote_control_enrollments` row.
    - User proof: mobile app can open and control the VM Codex session.
+   - Convenience: the GUI desktop has a trusted `Codex Desktop.desktop` shortcut.
 
 For detailed command sequences and known failure modes, read [references/runbook.md](references/runbook.md). For a read-only health check, run [scripts/audit-codex-remote-vm.sh](scripts/audit-codex-remote-vm.sh).
 
@@ -77,6 +79,7 @@ Always leave a short repo or note with:
 
 - VM host, VM id, VM name, guest IP, SSH alias, and GUI login method.
 - Exact launcher path and restart command.
+- Desktop shortcut path and whether it is trusted/executable.
 - The `config.toml` feature block.
 - How to verify enrollment and logs.
 - Whether mobile control was personally verified by the user.

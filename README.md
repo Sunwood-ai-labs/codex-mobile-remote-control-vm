@@ -104,6 +104,16 @@ After installing the skill, run the read-only audit script against an SSH alias 
 
 The audit checks desktop services, GUI session state, Codex config, app-server feature flags, remote-control enrollment, and recent Codex Desktop logs.
 
+## 🖥️ Create A Desktop Shortcut
+
+After the VM has a stable launcher, create the GUI desktop shortcut with:
+
+```bash
+ssh codex-ubuntu 'bash -s' < scripts/create-codex-desktop-shortcut.sh
+```
+
+This creates `~/Desktop/Codex Desktop.desktop` and `~/.local/share/applications/codex-desktop.desktop`, marks the desktop entry executable, and sets the trusted metadata when `gio` is available.
+
 ## 🧩 Repository Layout
 
 ```text
@@ -115,6 +125,7 @@ The audit checks desktop services, GUI session state, Codex config, app-server f
 ├── references/runbook.md            # Detailed setup and troubleshooting guide
 ├── docs/                            # Bilingual VitePress documentation
 ├── scripts/audit-codex-remote-vm.sh # Read-only VM health audit
+├── scripts/create-codex-desktop-shortcut.sh # GUI shortcut helper
 └── scripts/validate.sh              # Local repository validation
 ```
 
